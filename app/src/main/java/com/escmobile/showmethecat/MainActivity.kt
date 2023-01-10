@@ -10,12 +10,13 @@ import androidx.compose.ui.Modifier
 import com.escmobile.showmethecat.ui.theme.ShowMeTheCatTheme
 import com.escmobile.showmethecat.ui.view.DisplayFact
 import com.escmobile.showmethecat.ui.view.GetFact
+import com.escmobile.showmethecat.ui.view.Main
 import com.escmobile.showmethecat.ui.viewModule.CatViewModel
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-    private val catViewModel : CatViewModel by inject()
+    private val catViewModel: CatViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +26,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    DisplayFact(catViewModel)
-                    GetFact(::onGetFactButtonClick)
+                    Main(catViewModel, ::onGetFactButtonClick)
                 }
             }
         }
     }
 
-    private fun onGetFactButtonClick(){
+    private fun onGetFactButtonClick() {
         catViewModel.getCatFact()
     }
 }

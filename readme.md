@@ -1,8 +1,8 @@
 # Random cat facts with a random cat image
-### Cuteness is not guaranteed, please use it as-is.
+### *Cuteness is not guaranteed, please use it as-is.*
 
 ## Tech and libraries
-* Fully **Kotlin**
+* Full **Kotlin**, 100.0%
 * **Jetpack compose** with hoisted state to Viewmodel
 * MVVM architecture with **ViewModels** and uncoupled views through **LiveData**
 * **Repository** pattern
