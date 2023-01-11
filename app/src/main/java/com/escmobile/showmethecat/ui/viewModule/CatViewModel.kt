@@ -19,8 +19,7 @@ class CatViewModel(private val repo: CatRepo) : ViewModel() {
             val catFact = repo.getCatFact()
 
             // TODO: We handled potential network errors in the repo but another level of error handling could be added here if
-            //  the catFact happens to be null. For the sake of the simplicity, here we're preferring not to let the user (activity)
-            //  know, in case something went wrong.
+            //  the catFact happens to be null
             catFact?.let {
                 _catFactResult.postValue(CatViewState.Fact(it))
             } ?: run {
