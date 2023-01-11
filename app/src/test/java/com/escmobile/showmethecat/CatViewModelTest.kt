@@ -3,10 +3,10 @@ package com.escmobile.showmethecat
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.escmobile.showmethecat.MockData.mockCatFact
-import com.escmobile.showmethecat.MockData.mockCatViewResult
+import com.escmobile.showmethecat.MockData.mockCatViewFact
 import com.escmobile.showmethecat.data.CatRepo
 import com.escmobile.showmethecat.ui.viewModule.CatViewModel
-import com.escmobile.showmethecat.ui.viewModule.CatViewResult
+import com.escmobile.showmethecat.ui.viewModule.CatViewState
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -26,7 +26,7 @@ class CatViewModelTest {
     lateinit var mockRepo: CatRepo
 
     @RelaxedMockK
-    lateinit var mockObserver: Observer<CatViewResult>
+    lateinit var mockObserver: Observer<CatViewState>
 
     // sut
     private lateinit var catViewModel: CatViewModel
@@ -60,6 +60,6 @@ class CatViewModelTest {
         catViewModel.getCatFact()
 
         // then
-        coVerify { mockObserver.onChanged(mockCatViewResult) }
+        coVerify { mockObserver.onChanged(mockCatViewFact) }
     }
 }

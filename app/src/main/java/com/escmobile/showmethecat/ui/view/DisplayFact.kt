@@ -1,6 +1,7 @@
 package com.escmobile.showmethecat.ui.view
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,26 +19,28 @@ import com.escmobile.showmethecat.data.CAT_IMAGES_URL
 import com.escmobile.showmethecat.ui.viewModule.CatViewModel
 import com.escmobile.showmethecat.R
 import com.escmobile.showmethecat.data.model.CatFact
-import com.escmobile.showmethecat.ui.viewModule.CatViewResult
-import timber.log.Timber
+import com.escmobile.showmethecat.ui.viewModule.CatViewState
 
 @Composable
 fun DisplayFact(catViewModel: CatViewModel) {
 
-    val fact by catViewModel.catFactResult.observeAsState()
+    val fact by catViewModel.catFactResult.observeAsState(initial = CatViewState.NotSet)
 
-    if (fact is CatViewResult.Result) {
-        ShowFact((fact as CatViewResult.Result).result)
-    } else if (fact is CatViewResult.NotSet) {
-        Timber.d("ERROR")
-        Text(
-            color = Color.Red, text = stringResource(id = R.string.network_error)
-        )
+    when (fact) {
+        is CatViewState.Fact -> RenderFact((fact as CatViewState.Fact).result)
+        is CatViewState.InProgress -> CircularProgressIndicator()
+        is CatViewState.NotSet -> { // here for the sake of completeness - no need to do anything
+        }
+        is CatViewState.Error -> {
+            Text(
+                color = Color.Red, text = stringResource(id = R.string.network_error)
+            )
+        }
     }
 }
 
 @Composable
-private fun ShowFact(fact: CatFact) {
+private fun RenderFact(fact: CatFact) {
     Column( // container
         modifier = Modifier
             .fillMaxWidth()

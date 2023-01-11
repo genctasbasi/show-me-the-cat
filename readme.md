@@ -5,7 +5,7 @@
 ## Tech and libraries
 * Full **Kotlin**, 100.0%
 * **Jetpack compose** with hoisted state to ViewModel
-* MVVM architecture with **ViewModels** and uncoupled views with **LiveData**
+* MVVM architecture: **ViewModel**, uncoupled views with **LiveData**
 * **Repository** pattern
 * Retrofit for network communication
   * Potential network errors handled
@@ -17,7 +17,7 @@
 * Single activity app
 * Idiomatic and readable code with stateless Jetpack compose components
 * **Timer** for logging
-* Type safety with Sealed classes
+* State management with a Sealed class
 * Sample unit tests with **mockk**
   * I'm familiar with **mockito** framework too
 
