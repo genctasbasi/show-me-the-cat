@@ -10,7 +10,7 @@ const val CAT_IMAGES_URL = "https://cataas.com/cat/says/"
 interface CatAPI {
     @GET("/fact")
     suspend fun getCatFact() : Response<CatFact>
-d
+
     @GET("/facts")
     suspend fun getCatFacts() : Response<List<CatFact>>
 }
