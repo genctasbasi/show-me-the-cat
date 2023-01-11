@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Show me the cat</string>
+    <string name="network_error">Okay, something unexpected happened. Seems like we cannot access to API. Do you have internet connection?</string>
 </resources>

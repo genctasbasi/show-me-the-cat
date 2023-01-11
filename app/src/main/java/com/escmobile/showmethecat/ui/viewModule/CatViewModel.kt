@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 
 class CatViewModel(private val repo: CatRepo) : ViewModel() {
 
-    private val _catFact = MutableLiveData<CatFact>()
-    val catFact: LiveData<CatFact> = _catFact
+    private val _catFactResult = MutableLiveData<CatViewResult>()
+    val catFactResult: LiveData<CatViewResult> = _catFactResult
 
     fun getCatFact() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -21,9 +21,12 @@ class CatViewModel(private val repo: CatRepo) : ViewModel() {
             // TODO: We handled potential network errors in the repo but another level of error handling could be added here if
             //  the catFact happens to be null. For the sake of the simplicity, here we're preferring not to let the user (activity)
             //  know, in case something went wrong.
-            catFact?.let { fact ->
-                _catFact.postValue(fact)
+            catFact?.let {
+                _catFactResult.postValue(CatViewResult.Result(it))
+            } ?: run {
+                _catFactResult.postValue(CatViewResult.NotSet)
             }
+
         }
     }
 }
