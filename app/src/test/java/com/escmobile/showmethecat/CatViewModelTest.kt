@@ -15,6 +15,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.any
 
 @ExperimentalCoroutinesApi
 class CatViewModelTest {
@@ -61,5 +62,33 @@ class CatViewModelTest {
 
         // then
         coVerify { mockObserver.onChanged(mockCatViewFact) }
+    }
+
+    @Test
+    fun `in progress state is set making the fact call`() {
+
+        // given
+        catViewModel.catFactResult.observeForever(mockObserver)
+        coEvery { mockRepo.getCatFact() } returns any()
+
+        // when
+        catViewModel.getCatFact()
+
+        // then
+        coVerify { mockObserver.onChanged(CatViewState.InProgress) }
+    }
+
+    @Test
+    fun `error state is set when no fact is returned`() {
+
+        // given
+        catViewModel.catFactResult.observeForever(mockObserver)
+        coEvery { mockRepo.getCatFact() } returns null
+
+        // when
+        catViewModel.getCatFact()
+
+        // then
+        coVerify { mockObserver.onChanged(CatViewState.Error) }
     }
 }
