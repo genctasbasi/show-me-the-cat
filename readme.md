@@ -16,7 +16,7 @@
   * As I gradually move from RxJava to Coroutines / flows - hope it's OK. Can still work with RxJava
 * Single activity app
 * Idiomatic and readable code with stateless Jetpack compose components
-* **Timer** for logging
+* **Timber** for logging
 * Type safety with Sealed classes
 * Sample unit tests with **mockk**
   * I'm familiar with **mockito** framework too
